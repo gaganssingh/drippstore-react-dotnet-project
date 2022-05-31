@@ -8,9 +8,9 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { agent } from "../../app/api";
 import { Product } from "../../app/models/product";
 
 export const ProductDetails = () => {
@@ -20,20 +20,10 @@ export const ProductDetails = () => {
 
   useEffect(() => {
     setLoading(true);
-    const fetchProductDetails = async () => {
-      const { data } = await axios.get(
-        `http://localhost:5000/api/products/${id}`
-      );
-      setProduct(data);
-    };
-
-    try {
-      fetchProductDetails();
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
+    agent.Catalog.productDetails(+id)
+      .then((product) => setProduct(product))
+      .catch(console.error);
+    setLoading(false);
   }, [id]);
 
   if (loading) {
