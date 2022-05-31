@@ -30,7 +30,9 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         <Typography gutterBottom variant="h5">
           ${(product.price / 100).toFixed(2)}
         </Typography>
-        <Typography>{product.name}</Typography>
+        <Typography>
+          {product.name.split(" ").splice(0, 3).join(" ")}
+        </Typography>
         <Typography
           variant="body2"
           color="grey.700"
