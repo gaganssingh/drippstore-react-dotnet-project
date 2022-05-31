@@ -8,7 +8,7 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 
 interface HeaderProps {
@@ -22,6 +22,18 @@ const navLinks = [
   { title: "login", path: "/login" },
 ];
 
+const navStyles = {
+  color: "inherit",
+  typography: "h6",
+  textDecoration: "none",
+  "&:hover": {
+    color: "grey.500",
+  },
+  "&.active": {
+    color: "grey.200",
+  },
+};
+
 export const Header = ({ handleThemeSwitch }: HeaderProps) => {
   return (
     <AppBar
@@ -31,24 +43,14 @@ export const Header = ({ handleThemeSwitch }: HeaderProps) => {
     >
       <Toolbar>
         {/* LOGO */}
-        <Typography
-          variant="h6"
-          component={NavLink}
-          to="/"
-          sx={{ color: "inherit", textDecoration: "none" }}
-        >
+        <Typography variant="h6" component={Link} to="/" sx={navStyles}>
           dripp
         </Typography>
 
         {/* NAV LINKS */}
         <List sx={{ display: "flex", ml: "auto" }}>
           {navLinks.map(({ title, path }) => (
-            <ListItem
-              key={title}
-              component={NavLink}
-              to={path}
-              sx={{ color: "inherit", typography: "h6" }}
-            >
+            <ListItem key={title} component={NavLink} to={path} sx={navStyles}>
               {title.toUpperCase()}
             </ListItem>
           ))}
