@@ -55,7 +55,7 @@ interface ThemeSwitcherProps {
 
 export const ThemeSwitcher = ({ handleThemeSwitch }: ThemeSwitcherProps) => {
   return (
-    <FormGroup sx={{ ml: "auto" }}>
+    <FormGroup sx={{ ml: "30px" }}>
       <FormControlLabel
         control={<MaterialUISwitch sx={{ m: 1 }} onClick={handleThemeSwitch} />}
         label=""
