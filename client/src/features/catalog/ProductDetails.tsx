@@ -12,15 +12,15 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { agent } from "../../app/api";
 import { NotFound } from "../../app/errors/NotFound";
+import { LoadingSpinner } from "../../app/layout/LoadingSpinner";
 import { Product } from "../../app/models/product";
 
 export const ProductDetails = () => {
   const [product, setProduct] = useState<Product | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const { id } = useParams<{ id: string }>();
 
   useEffect(() => {
-    setLoading(true);
     agent.Catalog.productDetails(+id)
       .then((product) => setProduct(product))
       .catch(console.error);
@@ -28,7 +28,8 @@ export const ProductDetails = () => {
   }, [id]);
 
   if (loading) {
-    return <h3>Loading...</h3>;
+    // return <h3>Loading...</h3>;
+    return <LoadingSpinner message="Loadin product details" />;
   }
 
   if (!product) {
